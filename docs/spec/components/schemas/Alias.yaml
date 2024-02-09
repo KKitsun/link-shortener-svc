@@ -1,0 +1,8 @@
+type: object
+required:
+  - alias
+properties:
+  alias:
+    type: string
+    example: 9Wa5Lk
+    description: 6-character URL alias code

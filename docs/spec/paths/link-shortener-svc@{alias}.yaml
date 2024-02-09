@@ -1,0 +1,19 @@
+get:
+  summary: Get full URL using alias
+  tags:
+    - Get full URL
+  operationId: getUrlByAlias
+  parameters:
+    - name: alias
+      in: path
+      required: true
+      description: URL alias
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Successful response with full URL
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/URL'

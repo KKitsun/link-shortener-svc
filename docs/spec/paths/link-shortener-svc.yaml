@@ -1,0 +1,18 @@
+post:
+  summary: Post URL to get short alias
+  tags:
+    - Generate alias
+  operationId: generateAlias
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/URL'
+  responses:
+    '200':
+      description: Successful response with alias
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alias'

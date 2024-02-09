@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: 1.0.0
   title: link-shortener-svc
-  description: ''
+  description: Link shortening service
 servers:
-  - url: 'https://api.demo.tokend.io'
-    description: TokenD Developer Environment
+  - url: 'https://localhost:8000/integrations'
+    description: Link Shortener Developer Server
