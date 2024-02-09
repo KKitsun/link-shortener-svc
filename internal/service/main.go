@@ -29,11 +29,6 @@ func (s *service) run() error {
 	return http.Serve(s.listener, r)
 }
 
-type DBUrlOperator interface {
-	GetURL(alias string) (string, error)
-	SaveURL(urlToSave string, alias string) error
-}
-
 func newService(cfg config.Config) *service {
 	return &service{
 		log:      cfg.Log(),

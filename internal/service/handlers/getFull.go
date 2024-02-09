@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
 )
@@ -21,7 +22,7 @@ type URLGetter interface {
 func GetFull(urlGetter URLGetter) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		alias := "GIxeN0" //UrlAlias(r)
+		alias := chi.URLParam(r, "alias")
 		fmt.Println(alias)
 		if alias == "" {
 			Log(r).Error("Error getting alias from get request")
