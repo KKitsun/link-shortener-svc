@@ -4,5 +4,5 @@ info:
   title: link-shortener-svc
   description: Link shortening service
 servers:
-  - url: 'https://localhost:8000/integrations'
+  - url: 'http://localhost:8000/integrations'
     description: Link Shortener Developer Server

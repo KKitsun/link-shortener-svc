@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi"
@@ -21,7 +20,6 @@ func GetFull(urlGetter URLGetter) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		alias := chi.URLParam(r, "alias")
-		fmt.Println(alias)
 		if alias == "" {
 			Log(r).Error("Error getting alias from get request")
 			ape.RenderErr(w, problems.InternalError())
