@@ -12,9 +12,7 @@ import (
 )
 
 type AliasResponse struct {
-	Alias  string `json:"alias"`
-	Status string `json:"status"`
-	Error  string `json:"error,omitempty"`
+	Alias string `json:"alias"`
 }
 
 type URLSaver interface {
@@ -39,8 +37,7 @@ func Shorten(urlSaver URLSaver) http.HandlerFunc {
 		}
 
 		ape.Render(w, AliasResponse{
-			Alias:  alias,
-			Status: "Success",
+			Alias: alias,
 		})
 
 	}

@@ -10,9 +10,7 @@ import (
 )
 
 type FullURLResponse struct {
-	URL    string `json:"url"`
-	Status string `json:"status"`
-	Error  string `json:"error,omitempty"`
+	URL string `json:"url"`
 }
 
 type URLGetter interface {
@@ -43,8 +41,7 @@ func GetFull(urlGetter URLGetter) http.HandlerFunc {
 		}
 
 		ape.Render(w, FullURLResponse{
-			URL:    urlFromDB[0],
-			Status: "Success",
+			URL: urlFromDB[0],
 		})
 
 	}
