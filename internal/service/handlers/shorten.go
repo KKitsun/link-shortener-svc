@@ -9,38 +9,39 @@ import (
 	"gitlab.com/distributed_lab/ape/problems"
 
 	"github.com/KKitsun/link-shortener-svc/internal/service/requests"
+	"github.com/KKitsun/link-shortener-svc/internal/storage"
 )
 
 type AliasResponse struct {
 	Alias string `json:"alias"`
 }
 
-type URLSaver interface {
-	SaveURL(urlToSave string, alias string) error
-}
+func Shorten(w http.ResponseWriter, r *http.Request) {
+	db := DB(r)
 
-func Shorten(urlSaver URLSaver) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		req, err := requests.NewGetURL(r)
-		if err != nil {
-			ape.RenderErr(w, problems.BadRequest(err)...)
-			return
-		}
-
-		alias := generateAlias()
-
-		err = urlSaver.SaveURL(req.URL, alias)
-		if err != nil {
-			Log(r).WithError(err).Error("Error saving url to the database")
-			ape.RenderErr(w, problems.InternalError())
-			return
-		}
-
-		ape.Render(w, AliasResponse{
-			Alias: alias,
-		})
-
+	req, err := requests.NewGetURL(r)
+	if err != nil {
+		ape.RenderErr(w, problems.BadRequest(err)...)
+		return
 	}
+
+	alias := generateAlias()
+	link := storage.Link{
+		Alias: alias,
+		URL:   req.URL,
+	}
+
+	_, err = db.Link().SaveURL(link)
+	if err != nil {
+		Log(r).WithError(err).Error("failed to query db")
+		ape.RenderErr(w, problems.InternalError())
+		return
+	}
+
+	ape.Render(w, AliasResponse{
+		Alias: alias,
+	})
+
 }
 
 func generateAlias() string {

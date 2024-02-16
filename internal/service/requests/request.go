@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/go-chi/chi"
 	. "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
 	"gitlab.com/distributed_lab/logan/v3/errors"
@@ -29,4 +30,16 @@ func validateGetURL(request URLRequest) error {
 		Field(&data.URL, Required),
 		Field(&data.URL, is.URL),
 	)
+}
+
+func NewGetAlias(r *http.Request) (string, error) {
+	alias := chi.URLParam(r, "alias")
+
+	return alias, validateGetAlias(alias)
+}
+
+func validateGetAlias(alias string) error {
+	data := &alias
+
+	return Validate(data, Required)
 }

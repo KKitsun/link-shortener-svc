@@ -4,3 +4,6 @@ config.*.yaml
 docs/node_modules
 docs/web_deploy
 vendor/
+docker-compose.yml
+wait-for-postgres.sh
+nginx.conf
