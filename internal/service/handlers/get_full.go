@@ -28,8 +28,8 @@ func GetFull(w http.ResponseWriter, r *http.Request) {
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
-	if link == nil {
-		Log(r).WithError(err).Error("url not found")
+	if link.URL == "" {
+		Log(r).Error("url not found")
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
